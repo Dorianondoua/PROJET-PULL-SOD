@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@import "./jacket-masters.css";
+@import "./home.css";
+@import "./catalogue.css";
+@import "./product.css";
+@import "./shop.css";
+@import "./checkout.css";
+@import "./pages.css";
+
+/* ==========================================================================
+   Jacket Masters — base layer
+   ========================================================================== */
+
+html,
+body {
+  margin: 0;
+  /* Ink, the colour of the footer, so overscroll never flashes a light band. */
+  background: #0f0f0f;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  /* Nothing on this site is meant to scroll sideways. clip, not hidden:
+     hidden turns body into a scroll container and kills position:sticky. */
+  overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Fallback ring for anything a component doesn't style itself. */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--jm-focus-ring);
+}
+
+button {
+  font: inherit;
+}
+
+/* Skip link: hidden until a keyboard user tabs onto it. */
+.jm-skip {
+  position: fixed; top: 12px; left: 12px; z-index: 100;
+  padding: 12px 18px; border-radius: 999px; background: #fff; color: #0f0f0f;
+  font: 600 13px/1 var(--jm-montserrat, system-ui), sans-serif; text-decoration: none;
+  transform: translateY(-160%); transition: transform 200ms ease;
+}
+.jm-skip:focus { transform: none; box-shadow: var(--jm-focus-ring); }
+
+/* ---------- Page transitions (lib/usePageTransitions.ts) ---------- */
+::view-transition-old(root) { animation: jm-vt-out 260ms cubic-bezier(0.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: jm-vt-in 520ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both; }
+::view-transition-group(*) { animation-duration: 650ms; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+@keyframes jm-vt-out { to { opacity: 0; transform: scale(0.985); } }
+@keyframes jm-vt-in { from { opacity: 0; transform: translateY(24px); } }
+/* The header stays put while the page underneath changes. */
+.jm-header { view-transition-name: jm-header; }
+
+/* Safety net for anything not handled component by component. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

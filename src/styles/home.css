@@ -1,0 +1,231 @@
+/* ==========================================================================
+   Home — the sections under the hero, on ink
+   ========================================================================== */
+
+.jm-home {
+  overflow: hidden;
+  overflow: clip; /* keeps the sticky headings sticky */
+  color: var(--jm-text);
+  font-family: var(--jm-font-body);
+  background: #0f0f0f;
+}
+
+.jm-section { max-width: 1440px; margin: 0 auto; padding: 128px clamp(24px, 4vw, 64px) 0; }
+.jm-section--tight { padding-bottom: 128px; }
+.jm-section__head {
+  display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: var(--space-24px);
+  margin-bottom: var(--space-48px);
+}
+.jm-section__head > div { display: grid; gap: var(--space-24px); }
+.jm-section__lead { margin: 0; max-width: 44ch; font: 400 15px/1.65 var(--jm-font-body); color: var(--jm-text-muted); }
+
+.jm-h2 { margin: 0; font: 600 clamp(36px, 4.6vw, 72px)/1.02 var(--jm-font-display); letter-spacing: -0.02em; text-wrap: balance; }
+.jm-h2 em { font: italic 400 1.1em/1 var(--jm-font-serif); letter-spacing: 0; color: var(--jm-text-muted); }
+
+/* Underlined text link with an arrow that nudges on hover. */
+.jm-link {
+  display: inline-flex; align-items: center; gap: var(--space-8px);
+  padding-bottom: 6px; border-bottom: 1px solid currentColor;
+  font: 500 12px/1 var(--jm-font-display); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+  color: var(--jm-text);
+}
+.jm-link svg { transition: transform var(--duration-hover) var(--ease-standard); }
+.jm-link:hover svg { transform: translate(2px, -2px); }
+.jm-link:focus-visible { outline: none; box-shadow: var(--jm-focus-ring); border-radius: 2px; }
+
+/* ---------- Scroll reveal (see lib/useReveal.ts) ---------- */
+[data-reveal] {
+  transition: opacity 900ms ease, transform 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 100ms);
+}
+@media (scripting: enabled) {
+  [data-reveal]:not([data-revealed]) { opacity: 0; transform: translateY(40px); }
+}
+
+/* ---------- Marquee ---------- */
+.jm-marquee { overflow: hidden; padding: 22px 0; background: #ffffff; color: #0f0f0f; }
+.jm-marquee__track { display: flex; width: max-content; animation: jm-marquee 40s linear infinite; }
+.jm-marquee:hover .jm-marquee__track { animation-play-state: paused; }
+.jm-marquee__row { display: flex; flex-shrink: 0; margin: 0; padding: 0; list-style: none; }
+.jm-marquee__row li {
+  display: flex; align-items: center; gap: 40px; padding-right: 40px; white-space: nowrap;
+  font: italic 400 clamp(22px, 2.4vw, 34px)/1 var(--jm-font-serif);
+}
+.jm-marquee__row li:nth-child(even) { font: 600 clamp(14px, 1.4vw, 20px)/1 var(--jm-font-display); letter-spacing: 0.06em; text-transform: uppercase; }
+.jm-marquee__star { font: normal 400 14px/1 var(--jm-font-display); }
+@keyframes jm-marquee { to { transform: translateX(-50%); } }
+
+/* ---------- Features ---------- */
+.jm-features { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: start; gap: var(--space-64px); }
+.jm-features__head { position: sticky; top: var(--space-48px); display: grid; gap: var(--space-24px); }
+.jm-features__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-16px); margin: 0; padding: 0; list-style: none; }
+.jm-feature {
+  display: flex; flex-direction: column; gap: var(--space-12px);
+  min-height: 280px; padding: 28px;
+  border-radius: var(--radius-card-sm); border: 1px solid #ffffff14; background: #ffffff08;
+  transition:
+    opacity 900ms ease, transform 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 300ms ease, border-color 300ms ease;
+  transition-delay: calc(var(--i, 0) * 100ms), calc(var(--i, 0) * 100ms), 0s, 0s;
+}
+.jm-feature:hover { background: #ffffff10; border-color: #ffffff2e; }
+/* Offset the right column for a staggered rhythm. */
+.jm-feature:nth-child(even) { margin-top: var(--space-48px); margin-bottom: calc(var(--space-48px) * -1); }
+.jm-feature__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: auto; }
+.jm-feature__num { font: italic 400 22px/1 var(--jm-font-serif); color: var(--jm-text-muted); }
+.jm-feature__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; background: var(--jm-white); color: #0f0f0f; }
+.jm-feature__title { margin: var(--space-32px) 0 0; font: 600 20px/1.2 var(--jm-font-display); }
+.jm-feature__text { margin: 0; font: 400 14px/1.6 var(--jm-font-body); color: var(--jm-text-muted); }
+
+/* ---------- Shop by cut: bento ---------- */
+.jm-bento {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(220px, 21vw, 300px);
+  grid-template-areas:
+    "cropped cropped long hooded"
+    "cropped cropped long vests"
+    "acc acc acc acc";
+  gap: var(--space-16px); margin: 0; padding: 0; list-style: none;
+}
+.jm-bento__cell { min-width: 0; }
+.jm-bento__cell--cropped { grid-area: cropped; }
+.jm-bento__cell--long { grid-area: long; }
+.jm-bento__cell--hooded { grid-area: hooded; }
+.jm-bento__cell--vests { grid-area: vests; }
+.jm-bento__cell--acc { grid-area: acc; }
+.jm-bento__tile {
+  position: relative; display: block; height: 100%; overflow: hidden; isolation: isolate;
+  border-radius: var(--radius-card-sm); border: 1px solid #ffffff1a;
+  background: radial-gradient(ellipse 80% 75% at 50% 40%, var(--bg-start), var(--bg-end));
+  color: var(--jm-text);
+}
+.jm-bento__tile:focus-visible { outline: none; box-shadow: var(--jm-focus-ring); }
+.jm-bento__imgs { position: absolute; inset: 7% 8% 20%; display: flex; justify-content: center; gap: 4%; }
+.jm-bento__cell--acc .jm-bento__imgs { inset: 8% 22% 8% 30%; }
+.jm-bento__img { position: relative; flex: 1 1 0; }
+.jm-bento__img img { object-fit: contain; filter: drop-shadow(0 20px 24px #00000059); transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+.jm-bento__tile:hover .jm-bento__img img { transform: scale(1.07) translateY(-2%); }
+/* Right inset keeps long names clear of the arrow button: they wrap instead. */
+.jm-bento__label { position: absolute; left: 24px; right: 76px; bottom: 22px; display: grid; gap: 6px; }
+.jm-bento__name { font: 600 clamp(18px, 1.6vw, 24px)/1.1 var(--jm-font-display); }
+.jm-bento__cell--cropped .jm-bento__name { font-size: clamp(28px, 3vw, 44px); }
+.jm-bento__count { font: 400 13px/1 var(--jm-font-body); color: var(--jm-text-muted); }
+.jm-bento__arrow {
+  position: absolute; right: 20px; bottom: 20px; display: grid; place-items: center; width: 44px; height: 44px;
+  border-radius: 999px; background: var(--jm-accent); color: var(--jm-on-accent);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.jm-bento__tile:hover .jm-bento__arrow { transform: rotate(45deg); }
+
+/* ---------- Colour story: expanding panels ---------- */
+.jm-swatches { display: flex; gap: var(--space-12px); height: clamp(440px, 44vw, 620px); }
+.jm-swatch {
+  position: relative; flex: 1 1 0; min-width: 0; overflow: hidden;
+  border-radius: var(--radius-card-sm); border: 1px solid #ffffff1a;
+  background: radial-gradient(ellipse 90% 80% at 50% 40%, var(--bg-start), var(--bg-end));
+  color: var(--jm-text);
+  transition: flex-grow 700ms cubic-bezier(0.65, 0, 0.35, 1), height 700ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.jm-swatch[data-open="true"] { flex-grow: 4; }
+.jm-swatch__toggle {
+  position: absolute; top: 20px; left: 20px; z-index: 2;
+  display: inline-flex; align-items: center; gap: var(--space-12px);
+  padding: 6px 16px 6px 6px; border-radius: 999px;
+  background: var(--jm-glass); -webkit-backdrop-filter: blur(var(--blur-glass-px)); backdrop-filter: blur(var(--blur-glass-px));
+}
+.jm-swatch__toggle:focus-visible { outline: none; box-shadow: var(--jm-focus-ring); }
+.jm-swatch__dot { width: 24px; height: 24px; border-radius: 999px; border: 2px solid #ffffff99; }
+.jm-swatch__name { font: 500 11px/1 var(--jm-font-display); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+/* Closed panels get narrow below desktop width: the dot alone names them. */
+@media (max-width: 1100px) and (min-width: 761px) {
+  .jm-swatch:not([data-open="true"]) .jm-swatch__name { display: none; }
+  .jm-swatch:not([data-open="true"]) .jm-swatch__toggle { padding-right: 6px; }
+}
+/* The jacket keeps its size: a closed panel only shows a slice of it. */
+.jm-swatch__img {
+  position: absolute; top: 50%; left: 50%; width: clamp(280px, 32vw, 500px); aspect-ratio: 1;
+  transform: translate(-50%, -56%) scale(0.8);
+  transition: transform 700ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.jm-swatch[data-open="true"] .jm-swatch__img { transform: translate(-50%, -56%) scale(1); }
+.jm-swatch__img img { object-fit: contain; filter: drop-shadow(0 24px 30px #00000059); }
+.jm-swatch__text {
+  position: absolute; left: 24px; right: 24px; bottom: 24px;
+  display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: var(--space-16px);
+  opacity: 0; transform: translateY(16px); pointer-events: none;
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+.jm-swatch[data-open="true"] .jm-swatch__text { opacity: 1; transform: none; pointer-events: auto; transition-delay: 350ms; }
+.jm-swatch__mood { margin: 0; max-width: 24ch; font: italic 400 clamp(20px, 1.8vw, 28px)/1.2 var(--jm-font-serif); }
+
+/* ---------- Reviews ---------- */
+.jm-reviews { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: start; gap: var(--space-64px); }
+.jm-reviews__score { position: sticky; top: var(--space-48px); display: grid; justify-items: start; gap: var(--space-24px); }
+.jm-reviews__big { margin: var(--space-16px) 0 0; font: 600 clamp(88px, 9vw, 144px)/0.9 var(--jm-font-display); letter-spacing: -0.04em; }
+.jm-reviews__big span { margin-left: 6px; font-size: 0.28em; letter-spacing: 0; color: var(--jm-text-muted); }
+.jm-stars { display: inline-flex; gap: 3px; color: var(--jm-text); }
+.jm-reviews__list { columns: 2; column-gap: var(--space-16px); margin: 0; padding: 0; list-style: none; }
+.jm-review {
+  display: grid; gap: 14px; break-inside: avoid; margin-bottom: var(--space-16px); padding: 28px;
+  border-radius: var(--radius-card-sm); border: 1px solid #ffffff14; background: #ffffff08;
+}
+.jm-review__title { margin: 0; font: 600 17px/1.3 var(--jm-font-display); }
+.jm-review__text { margin: 0; font: 400 14px/1.65 var(--jm-font-body); color: var(--jm-text-muted); }
+.jm-review__foot {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-12px);
+  padding-top: 14px; border-top: 1px solid #ffffff14; font: 400 13px/1.45 var(--jm-font-body);
+}
+.jm-review__meta { font-size: 12px; color: var(--jm-text-muted); }
+.jm-review__product {
+  position: relative; flex: none; width: 52px; height: 52px; border-radius: 16px;
+  background: radial-gradient(circle, var(--bg-start), var(--bg-end));
+  transition: transform var(--duration-hover) var(--ease-standard);
+}
+.jm-review__product:hover { transform: scale(1.08); }
+.jm-review__product:focus-visible { outline: none; box-shadow: var(--jm-focus-ring); }
+.jm-review__thumb { position: absolute; inset: 5px; }
+.jm-review__thumb img { object-fit: contain; }
+
+/* ---------- Closing call to action ---------- */
+.jm-cta {
+  position: relative; overflow: hidden; display: grid; place-items: center;
+  min-height: 520px; padding: 80px 24px; border-radius: 40px; text-align: center;
+  color: var(--jm-text);
+  background: radial-gradient(ellipse 70% 90% at 50% 50%, var(--bg-start), var(--bg-end));
+}
+.jm-cta__copy { position: relative; z-index: 1; display: grid; justify-items: center; gap: var(--space-24px); }
+.jm-cta__actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: var(--space-24px); }
+.jm-cta__jacket { position: absolute; width: clamp(200px, 26vw, 400px); aspect-ratio: 1; animation: jm-float var(--duration-float) var(--ease-standard) infinite; }
+.jm-cta__jacket img { object-fit: contain; filter: drop-shadow(0 30px 30px #00000059); }
+.jm-cta__jacket--left { left: -4%; bottom: -14%; rotate: -14deg; }
+.jm-cta__jacket--right { right: -4%; top: -12%; rotate: 12deg; animation-delay: -2s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .jm-features, .jm-reviews { grid-template-columns: 1fr; gap: var(--space-48px); }
+  .jm-features__head, .jm-reviews__score { position: static; }
+}
+@media (max-width: 760px) {
+  .jm-section { padding-top: 88px; }
+  .jm-section--tight { padding-bottom: 88px; }
+  .jm-features__grid { grid-template-columns: 1fr; }
+  .jm-feature { min-height: 0; }
+  .jm-feature:nth-child(even) { margin: 0; }
+  .jm-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 200px;
+    grid-template-areas: "cropped cropped" "cropped cropped" "long hooded" "long vests" "acc acc";
+  }
+  .jm-bento__cell--acc .jm-bento__imgs { inset: 8% 8% 8% 40%; }
+  .jm-bento__label { left: 16px; right: 60px; bottom: 16px; }
+  .jm-bento__arrow { right: 12px; bottom: 12px; width: 38px; height: 38px; }
+  .jm-swatches { flex-direction: column; height: auto; }
+  .jm-swatch { flex: none; height: 84px; }
+  .jm-swatch[data-open="true"] { height: 460px; }
+  .jm-reviews__list { columns: 1; }
+  .jm-cta { min-height: 460px; border-radius: var(--radius-card-sm); }
+  .jm-cta__jacket { width: 170px; opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jm-marquee__track, .jm-cta__jacket { animation: none; }
+  [data-reveal], .jm-swatch, .jm-swatch__img, .jm-swatch__text, .jm-bento__img img { transition: none; }
+}

@@ -1,0 +1,138 @@
+/* ==========================================================================
+   Content pages — About, Contact, 404
+   ========================================================================== */
+
+/* ---------- About: opening ---------- */
+.jm-about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); align-items: center; gap: var(--space-48px); }
+.jm-about__art { position: relative; width: 100%; max-height: 70svh; aspect-ratio: 1; }
+.jm-about__jacket { position: absolute; aspect-ratio: 1; animation: jm-float var(--duration-float) var(--ease-standard) infinite; }
+.jm-about__jacket img { object-fit: contain; filter: drop-shadow(0 28px 30px #00000059); }
+.jm-about__jacket--back { top: 0; left: 2%; width: 52%; rotate: -12deg; animation-delay: -1s; }
+.jm-about__jacket--front { top: 16%; left: 16%; width: 74%; }
+.jm-about__jacket--side { right: -2%; bottom: 0; width: 36%; rotate: 14deg; animation-delay: -2.5s; }
+
+.jm-stats {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-24px);
+  margin: var(--space-64px) 0 0; padding: var(--space-32px) 0 0; border-top: 1px solid #ffffff3d; list-style: none;
+}
+.jm-stats li { display: grid; gap: var(--space-8px); }
+.jm-stats strong { font: 600 clamp(36px, 4cqw, 64px)/1 var(--jm-font-display); letter-spacing: -0.03em; }
+.jm-stats span { font: 400 14px/1.4 var(--jm-font-body); color: var(--jm-text-muted); }
+
+/* ---------- About: timeline ---------- */
+.jm-timeline { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-24px); margin: 0; padding: 0; list-style: none; }
+/* The rail runs through the dots' centres. */
+.jm-timeline::before { content: ""; position: absolute; top: 6px; left: 0; right: 0; height: 1px; background: #ffffff2e; }
+.jm-timeline__item { position: relative; display: grid; align-content: start; gap: 14px; }
+.jm-timeline__dot { width: 12px; height: 12px; margin-bottom: var(--space-8px); border-radius: 999px; background: #fff; box-shadow: 0 0 0 6px #0f0f0f; }
+.jm-timeline__item:last-child .jm-timeline__dot { animation: jm-pulse 2.4s ease-out infinite; }
+@keyframes jm-pulse { 0% { box-shadow: 0 0 0 6px #0f0f0f, 0 0 0 6px #ffffff66; } 100% { box-shadow: 0 0 0 6px #0f0f0f, 0 0 0 22px #ffffff00; } }
+.jm-timeline__year {
+  font: 600 clamp(40px, 4vw, 60px)/1 var(--jm-font-display); letter-spacing: -0.03em;
+  color: transparent; -webkit-text-stroke: 1px #ffffffb3; transition: color 400ms ease;
+}
+.jm-timeline__item:hover .jm-timeline__year { color: #fff; }
+.jm-timeline__title { margin: 0; font: 600 17px/1.25 var(--jm-font-display); }
+.jm-timeline__text { margin: 0; font: 400 14px/1.6 var(--jm-font-body); color: var(--jm-text-muted); }
+
+/* ---------- About: values ---------- */
+.jm-values { margin: 0; padding: 0; border-top: 1px solid #ffffff24; list-style: none; }
+.jm-values__row {
+  position: relative; display: grid; grid-template-columns: 80px minmax(0, 1.1fr) minmax(0, 1fr); align-items: baseline; gap: var(--space-32px);
+  padding: 40px 0; border-bottom: 1px solid #ffffff24;
+}
+/* A red wash sweeps in behind the row you point at. */
+.jm-values__row::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, #c4000040, transparent 70%);
+  transform: scaleX(0); transform-origin: left; transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.jm-values__row:hover::before { transform: none; }
+.jm-values__num { position: relative; font: italic 400 24px/1 var(--jm-font-serif); color: var(--jm-text-muted); }
+.jm-values__title { position: relative; margin: 0; font: 600 clamp(26px, 3vw, 44px)/1.05 var(--jm-font-display); letter-spacing: -0.02em; }
+.jm-values__text { position: relative; max-width: 44ch; margin: 0; font: 400 15px/1.65 var(--jm-font-body); color: var(--jm-text-muted); }
+
+/* ---------- About: founder's quote ---------- */
+.jm-quote { display: grid; justify-items: center; gap: var(--space-32px); margin: 0; padding: var(--space-24px) 0; text-align: center; }
+.jm-quote blockquote { margin: 0; }
+.jm-quote p { max-width: 22ch; margin: 0; font: italic 400 clamp(32px, 4.6vw, 68px)/1.15 var(--jm-font-serif); text-wrap: balance; }
+.jm-quote figcaption { display: flex; align-items: center; gap: 14px; text-align: left; font: 400 13px/1.4 var(--jm-font-body); color: var(--jm-text-muted); }
+.jm-quote figcaption strong { display: block; font: 600 14px/1.3 var(--jm-font-display); color: var(--jm-text); }
+.jm-quote__avatar { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 999px; background: radial-gradient(circle, #c40000, #6e0000); color: #fff; font: 600 15px/1 var(--jm-font-serif); }
+
+/* ---------- Contact ---------- */
+.jm-contact { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); align-items: start; gap: var(--space-32px); margin-top: var(--space-48px); }
+.jm-contact__panel {
+  padding: 32px; border-radius: var(--radius-card-sm); border: 1px solid #ffffff26; background: #00000040;
+  -webkit-backdrop-filter: blur(var(--blur-glass-px)); backdrop-filter: blur(var(--blur-glass-px));
+}
+.jm-field__textarea { height: auto; min-height: 150px; padding: 14px 16px; line-height: 1.5; resize: vertical; }
+.jm-field__foot { display: flex; justify-content: space-between; gap: var(--space-12px); }
+.jm-field__count { margin-left: auto; font: 400 12px/1.3 var(--jm-font-body); color: var(--jm-text-muted); font-variant-numeric: tabular-nums; }
+.jm-contact__send { justify-self: start; }
+.jm-contact__sent { display: grid; justify-items: start; gap: var(--space-16px); padding: var(--space-16px) 0; }
+.jm-contact__sent h2 { margin: 0; font: 600 32px/1.1 var(--jm-font-display); }
+.jm-contact__sent p { margin: 0; font: 400 15px/1.6 var(--jm-font-body); color: var(--jm-text-muted); }
+.jm-contact__sent strong { color: var(--jm-text); }
+.jm-contact__sent .jm-contact__demo { font-size: 12px; }
+.jm-contact__sent-icon { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 999px; background: #fff; color: #8f3f05; animation: jm-pop 500ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes jm-pop { from { transform: scale(0); } }
+
+.jm-contact__aside { display: grid; gap: var(--space-12px); }
+.jm-channels { display: grid; gap: var(--space-12px); margin: 0; padding: 0; list-style: none; }
+.jm-channel { display: flex; align-items: flex-start; gap: var(--space-16px); padding: 20px; border-radius: 20px; background: var(--jm-glass); }
+.jm-channel > span:last-child { display: grid; gap: 4px; min-width: 0; }
+.jm-channel small { font: 500 11px/1 var(--jm-font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--jm-text-muted); }
+.jm-channel strong { overflow-wrap: anywhere; font: 600 15px/1.3 var(--jm-font-display); }
+.jm-channel > span:last-child > span { font: 400 13px/1.4 var(--jm-font-body); color: var(--jm-text-muted); }
+.jm-channel__icon { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 999px; background: #fff; color: #0f0f0f; }
+.jm-channel--row .jm-social { margin: 4px 0 0 -8px; }
+
+/* FAQ */
+.jm-faq { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: start; gap: var(--space-64px); }
+.jm-faq__head { position: sticky; top: var(--space-48px); display: grid; gap: var(--space-24px); }
+.jm-faq .jm-acc__btn { padding: 24px 0; font-size: 17px; }
+.jm-faq .jm-acc__content { padding-bottom: 24px; font-size: 15px; }
+
+/* ---------- 404 ---------- */
+.jm-404 { display: grid; justify-items: center; align-content: center; gap: 20px; min-height: 60svh; padding: var(--space-24px) 0 var(--space-48px); text-align: center; }
+.jm-404__code {
+  display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 24px); margin: 0;
+  font: 700 clamp(140px, 24cqw, 340px)/0.85 var(--jm-font-display); letter-spacing: -0.06em;
+  animation: jm-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* The 0: a faint ring with the jacket floating inside it. */
+.jm-404__zero { position: relative; width: 0.78em; height: 0.92em; border-radius: 50%; animation: jm-float var(--duration-float) var(--ease-standard) infinite; }
+.jm-404__zero::before { content: ""; position: absolute; inset: 4%; border-radius: 50%; border: 0.045em solid currentColor; opacity: 0.22; }
+.jm-404__zero:focus-visible { outline: none; box-shadow: var(--jm-focus-ring); }
+.jm-404__jacket { position: absolute; inset: -6%; opacity: 0; transform: scale(0.8) rotate(-12deg); transition: opacity 500ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+.jm-404__jacket[data-active="true"] { opacity: 1; transform: none; }
+.jm-404__zero:hover .jm-404__jacket[data-active="true"] { transform: scale(1.06) rotate(4deg); }
+.jm-404__jacket img { object-fit: contain; filter: drop-shadow(0 24px 28px #00000066); }
+.jm-404__title { margin: 0; font: 600 clamp(24px, 3cqw, 40px)/1.1 var(--jm-font-display); }
+.jm-404__lead { max-width: 46ch; margin: 0; font: 400 16px/1.6 var(--jm-font-body); color: var(--jm-text-muted); }
+.jm-404__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-24px); margin-top: var(--space-8px); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .jm-about { grid-template-columns: minmax(0, 1fr); }
+  .jm-about__art { justify-self: center; max-width: 520px; }
+  .jm-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-32px); }
+  /* Timeline turns vertical: the rail runs down the left. */
+  .jm-timeline { grid-template-columns: minmax(0, 1fr); gap: var(--space-32px); }
+  .jm-timeline::before { top: 6px; bottom: 0; left: 5px; right: auto; width: 1px; height: auto; }
+  .jm-timeline__item { padding-left: 36px; }
+  .jm-timeline__dot { position: absolute; top: 0; left: 0; margin: 0; }
+  .jm-contact { grid-template-columns: minmax(0, 1fr); }
+  .jm-faq { grid-template-columns: minmax(0, 1fr); gap: var(--space-32px); }
+  .jm-faq__head { position: static; }
+}
+@media (max-width: 560px) {
+  .jm-values__row { grid-template-columns: minmax(0, 1fr); gap: var(--space-8px); padding: 28px 0; }
+  .jm-contact__panel { padding: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jm-about__jacket, .jm-404__zero, .jm-404__code, .jm-timeline__item:last-child .jm-timeline__dot, .jm-contact__sent-icon { animation: none; }
+  .jm-404__jacket, .jm-values__row::before, .jm-timeline__year { transition: none; }
+}
